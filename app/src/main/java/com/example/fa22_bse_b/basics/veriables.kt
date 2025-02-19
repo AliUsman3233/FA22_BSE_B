@@ -5,9 +5,13 @@ fun main() {
 //    print("Mobile Application Development")
 
 //    int a = 30;
-//    val a = 30
-//    var b = 40
-//    b = 20
-//    val sum = a + b
-//    print("Sum  = $sum")
+    var a:Int? = 60  // nullable
+    var b:Int? = null
+
+    val sum = (a?:0) + (b?:0)
+
+    val div = (a?:0) / (b?:1) // else-wise
+    print("Sum = $sum")
+    print("Div = $div")
+
 }
