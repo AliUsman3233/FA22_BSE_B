@@ -17,18 +17,21 @@ fun main() {
     println("Enter name you want to search")
     val nameToSearch = Scanner(System.`in`).nextLine()
 
-    var searchState: Boolean = false
-    for (i in 0..studentList.size - 1) {
-        if (studentList.get(i).name == nameToSearch) {
-            searchState = true
-        }
-    }
+    val foundObject = studentList.filter { it.name == nameToSearch }
+    print("Found object  = ${foundObject.getOrNull(0)}")
 
-    if (searchState == true) {
-        println("Student with name $nameToSearch is found")
-    } else {
-        println("No record found with name  = $nameToSearch")
-    }
+//    var searchState: Boolean = false
+//    for (i in 0..studentList.size - 1) {
+//        if (studentList.get(i).name == nameToSearch) {
+//            searchState = true
+//        }
+//    }
+//
+//    if (searchState == true) {
+//        println("Student with name $nameToSearch is found")
+//    } else {
+//        println("No record found with name  = $nameToSearch")
+//    }
 
 
 //
@@ -40,5 +43,4 @@ fun main() {
 //    } else {
 //        println("B is greater")
 //    }
-
 }

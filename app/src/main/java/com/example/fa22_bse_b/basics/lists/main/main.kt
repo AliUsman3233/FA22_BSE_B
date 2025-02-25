@@ -11,7 +11,12 @@ fun main() {
     // Lists --> Array
 //    Movie movieList[20] = {}
 
-    val movieList: MutableList<Movie> = mutableListOf(
+    var movieList: MutableList<Movie>? = null
+    movieList = mutableListOf()
+
+    println("first member of list = ${movieList?.getOrNull(0)}")
+
+    movieList = mutableListOf(
         Movie(title = "Iron Man", releaseDate = "712", price = 10),
         Movie(title = "Doctor Strange", releaseDate = "123", price = 20),
         Movie(title = "Barbie", releaseDate = "456", price = 10000),
