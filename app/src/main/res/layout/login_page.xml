@@ -81,6 +81,17 @@
             app:layout_constraintTop_toBottomOf="@id/password_label"
             android:hint="Enter your email"
             android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            />
+
+        <ImageView
+            android:id="@+id/passowrd_toggel"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_remove_red_eye_24"
+            app:layout_constraintTop_toTopOf="@id/password_et"
+            app:layout_constraintEnd_toEndOf="@id/password_et"
+            android:padding="10dp"
             />
 
 
