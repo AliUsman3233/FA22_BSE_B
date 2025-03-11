@@ -1,12 +1,12 @@
 package com.example.fa22_bse_b.basics.callBack.main
 
-import android.R
 
 data class Student(
     val name: String,
     val age: Int,
     val phoneNumber: String,
-    val marks: Int
+    val marks: Int,
+    val gender: Boolean
 )
 
 fun main() {
@@ -18,7 +18,7 @@ fun main() {
 //        println("Your name is Invalid")
 //    })
 
-    val student = Student(name = "Awais", age = 20, phoneNumber = "1234567", marks = -20)
+    val student = Student(name = "Awais", age = 20, phoneNumber = "1234567", marks = -20, gender = false)
     verifyStudent(student = student, validNameCallBack = { message ->
         println(message)
     }, invalidNameCallBack = { message ->
@@ -63,4 +63,3 @@ fun verifyStudent(
         failCallBack.invoke("'${student.name}' has failed with '${student.marks}'")
     }
 }
-
