@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -23,6 +24,14 @@ class tiktakActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tiktak)
+        val extras = intent?.extras
+
+        val email = extras?.get("email")
+        val password = extras?.get("password")
+
+        Toast.makeText(this,"$TAG onCreate", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"$TAG Welcome ${extras?.get("email")?:"Unknown"}", Toast.LENGTH_SHORT).show()
+
         val topLeft_ref: ImageView = findViewById(R.id.topLeft_child)
         val topCenter_ref: ImageView = findViewById(R.id.topCenter_child)
         val topRight_ref: ImageView = findViewById(R.id.topRight_child)
@@ -106,4 +115,19 @@ class tiktakActivity : AppCompatActivity() {
         feMaleStudentCallBack.invoke(students.filter { student-> student.gender == true })
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this,"$TAG onPause", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this,"$TAG onResume", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this,"$TAG onDestroy", Toast.LENGTH_SHORT).show()
+    }
 }
