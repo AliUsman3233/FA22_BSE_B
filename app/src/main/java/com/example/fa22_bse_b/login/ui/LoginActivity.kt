@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fa22_bse_b.R
 import com.example.fa22_bse_b.login.model.LoginModel
+import com.example.fa22_bse_b.state_managment.SystemState
 import com.example.fa22_bse_b.tiktak.tiktakActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -40,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
             val enteredPasswordValue: String = password_et_ref.getText().toString()
             if(enteredEmailValue == actualEmail && enteredPasswordValue == actualPassword) {
                 Toast.makeText(this,"Valid Credentials, Login Successful", Toast.LENGTH_SHORT).show()
+                SystemState.loginState = true
                 val tiktalIntent = Intent(this, tiktakActivity::class.java).putExtra("email", actualEmail).putExtra("password", actualPassword)
                 startActivity(tiktalIntent)
                 finish()

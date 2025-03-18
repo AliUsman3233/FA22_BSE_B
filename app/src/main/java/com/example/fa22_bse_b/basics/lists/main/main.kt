@@ -24,6 +24,9 @@ fun main() {
     )
     movieList.add(Movie("abc","122",-20))
 
+
+
+
 //    var index: Int = 0
 //
 //    while(index<movieList.size) {

@@ -1,5 +1,6 @@
 package com.example.fa22_bse_b.tiktak
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fa22_bse_b.R
 import com.example.fa22_bse_b.basics.callBack.main.Student
+import com.example.fa22_bse_b.login.ui.LoginActivity
+import com.example.fa22_bse_b.state_managment.SystemState
 
 class tiktakActivity : AppCompatActivity() {
 
@@ -24,6 +27,13 @@ class tiktakActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tiktak)
+
+        if(SystemState.loginState == false) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            return
+        }
+
+
         val extras = intent?.extras
 
         val email = extras?.get("email")
