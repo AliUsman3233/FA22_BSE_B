@@ -23,6 +23,7 @@
             android:layout_marginTop="100dp"
             android:text="@{countValue}"
             android:textSize="40dp"
+            tools:text="00000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
