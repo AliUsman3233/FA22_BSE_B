@@ -20,12 +20,13 @@ class ProductsAdopter : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(
         val productRowBinding: ProductRowDesignBinding = ProductRowDesignBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return ProductViewHolder(productRowBinding)
+        return ProductViewHolder(productRowBinding = productRowBinding)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, location: Int) {
-        val item = getItem(location)
-        holder.productRowBinding.price.setText(item.price.toString())
+        val dataItem = getItem(location)
+        holder.productRowBinding.product = dataItem
+//        holder.productRowBinding.price.setText(dataItem.price.toString())
     }
 
 

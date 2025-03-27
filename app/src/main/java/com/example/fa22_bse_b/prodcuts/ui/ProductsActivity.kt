@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_b.R
 import com.example.fa22_bse_b.databinding.ProductListScreenBinding
 import com.example.fa22_bse_b.prodcuts.adopter.ProductsAdopter
@@ -87,7 +88,12 @@ class ProductsActivity : AppCompatActivity() {
 
 
         productListAdopter = ProductsAdopter()
+
+
+        binding?.productRv?.adapter = productListAdopter
+        binding?.productRv?.layoutManager = LinearLayoutManager(this)
         productListAdopter?.submitList(productsList)
+        productListAdopter?.notifyDataSetChanged()
         Log.e(this@ProductsActivity.javaClass.simpleName, "onCreate: List = $productsList", )
     }
 }
