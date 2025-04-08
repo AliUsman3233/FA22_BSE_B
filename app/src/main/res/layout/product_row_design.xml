@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="@{product.desc}"
-                app:layout_constraintEnd_toStartOf="@id/delete_btn"
+                app:layout_constraintEnd_toStartOf="@id/Update_btn"
                 app:layout_constraintStart_toEndOf="@id/line"
                 app:layout_constraintTop_toTopOf="@id/delete_btn" />
 
@@ -62,6 +62,16 @@
                 android:layout_marginEnd="5dp"
                 android:src="@drawable/baseline_delete_outline_24"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/Update_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/baseline_edit_24"
+                app:layout_constraintEnd_toStartOf="@id/delete_btn"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView

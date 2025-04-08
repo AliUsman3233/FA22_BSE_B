@@ -21,5 +21,15 @@
             tools:listitem="@layout/product_row_design"
 
             />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="30dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_b.databinding.ProductRowDesignBinding
 import com.example.fa22_bse_b.prodcuts.model.Product
 
-class ProductsAdopter : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(diffCheker) {
+// Ui Layer
+class ProductsAdopter(var deleteProductCallBack: (String) -> Unit, var updateProductCallBack: (String) -> Unit) : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(diffCheker) {
 
 
     inner class ProductViewHolder(var productRowBinding: ProductRowDesignBinding) :
@@ -23,9 +24,17 @@ class ProductsAdopter : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(
         return ProductViewHolder(productRowBinding = productRowBinding)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, location: Int) {
-        val dataItem = getItem(location)
+    override fun onBindViewHolder(holder: ProductViewHolder, index: Int) {
+        val dataItem = getItem(index)
         holder.productRowBinding.product = dataItem
+
+        holder.productRowBinding.deleteBtn.setOnClickListener {
+            deleteProductCallBack.invoke(dataItem.id)
+        }
+
+        holder.productRowBinding.UpdateBtn.setOnClickListener {
+            updateProductCallBack.invoke(dataItem.id)
+        }
 //        holder.productRowBinding.price.setText(dataItem.price.toString())
     }
 
