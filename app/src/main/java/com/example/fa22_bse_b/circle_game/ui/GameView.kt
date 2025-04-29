@@ -52,7 +52,26 @@ class GameView(context: Context, val radius: Float = 0f) : View(context) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawCircle(cX, cY, radius, circlePaint)
         canvas.drawText(score.toString(),(width-50).toFloat(), 100f, scorePaint)
+
+        when(Random.nextDouble(0.0,5.0).toInt()) {
+            1 -> {
+                canvas.drawCircle(cX, cY, radius, circlePaint)
+            }
+            2-> {
+                canvas.drawArc(cX - radius, cY+radius, cX+radius, cY+radius,50f,90f,true, circlePaint)
+            }
+            3->{
+                canvas.drawCircle(cX, cY, radius, circlePaint)
+            }
+            4->{
+                canvas.drawCircle(cX, cY, radius, circlePaint)
+            }
+            5->{
+                canvas.drawCircle(cX, cY, radius, circlePaint)
+            }
+        }
+
+
     }
 }
