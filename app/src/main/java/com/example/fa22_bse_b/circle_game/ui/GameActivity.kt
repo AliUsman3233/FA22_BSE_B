@@ -8,22 +8,16 @@ import kotlinx.coroutines.launch
 
 class GameActivity : AppCompatActivity() {
 
-    var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val gameView = GameView(this, radius = 50f, onCircleClickCallBack = {
-            score++
-            println("Current Score  = $score")
-            score
-        })
+        val gameView = GameView(this, 50f)
         setContentView(gameView)
-
-
-        lifecycleScope.launch {
+//
+//        lifecycleScope.launch {
 //            while(true) {
-            delay(2000)
-            gameView.drawCircleAtRandomPosition()
+//                delay(200)
+//                gameView.drawCircleAtRandomPosition()
 //            }
-        }
+//        }
     }
 }

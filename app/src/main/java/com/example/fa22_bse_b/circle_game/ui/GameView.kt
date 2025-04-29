@@ -8,32 +8,32 @@ import android.view.MotionEvent
 import android.view.View
 import kotlin.random.Random
 
-class GameView(context: Context, val radius: Float, val onCircleClickCallBack: () -> Int) :
-    View(context) {
-    val circlePaint = Paint()
-    val scorePaint = Paint()
-
-    var cX = radius
-    var cY = radius
-    var score = 0
-
-
-    fun drawCircleAtRandomPosition() {
-        cX = Random.nextDouble(radius.toDouble(), (width - radius).toDouble()).toFloat()
-        cY = Random.nextDouble(radius.toDouble(), (height - radius).toDouble()).toFloat()
-        invalidate()
+class GameView(context: Context, val radius: Float = 0f) : View(context) {
+    private val circlePaint = Paint()
+    private val scorePaint = Paint().apply {
+        textSize = 100f
     }
+    private var cX: Float = radius
+    private var cY: Float = radius
+    private var score = 0
+    private val colorList = arrayListOf(
+        Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.YELLOW
+    )
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
 
-//        println("Touch is detected on x = ${event?.x}, y = ${event?.y}")
-
-        if ((event?.x ?: 0f) > (cX - (radius*2)) && (event?.x ?: 0f) < cX + (radius*2) && (event?.y
-                ?: 0f) > (cY - radius) && (event?.y ?: 0f) < cY + radius
-        ) {
-//            println("Touch is detected on circle x = ${event?.x}, y = ${event?.y}")
-            score = onCircleClickCallBack.invoke()
+        if (event?.x ?: 0f > cX - radius && event?.x ?: 0f < cX + radius && event?.y ?: 0f > cY - radius && event?.y ?: 0f < cY + radius) {
+            score++
+            println("Circle Start point = ${cX - radius}")
+            println("Circle End point = ${cX + radius}")
+            println("Circle Y Start point = ${cY - radius}")
+            println("Circle Y End point = ${cY + radius}")
+            println("cX = $cX, cY = $cY")
+            println("radius = $radius")
+            println("Click is inside of the circle at : ${event?.x}, ${event?.y}")
             drawCircleAtRandomPosition()
+        } else {
+            println("Click is outside of the circle at : ${event?.x}, ${event?.y}")
         }
 
 
@@ -41,18 +41,18 @@ class GameView(context: Context, val radius: Float, val onCircleClickCallBack: (
     }
 
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        circlePaint.color = Color.BLUE
-        if (score < 5) {
-            scorePaint.color = Color.RED
-        } else {
-            scorePaint.color = Color.GREEN
-        }
-        scorePaint.textSize = 40f
-        canvas.drawCircle(cX, cY, radius, circlePaint)
+    fun drawCircleAtRandomPosition() {
+        cX = Random.nextDouble(radius.toDouble(), (width - radius).toDouble()).toFloat()
+        cY = Random.nextDouble(radius.toDouble(), (height - radius).toDouble()).toFloat()
+        circlePaint.color = colorList.get(Random.nextInt(0, colorList.size - 1))
+        scorePaint.color = circlePaint.color
 
-        canvas.drawText("Score  = $score", cX- (radius * 2), cY - (radius * 2), scorePaint)
+        invalidate()
     }
 
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        canvas.drawCircle(cX, cY, radius, circlePaint)
+        canvas.drawText(score.toString(),(width-50).toFloat(), 100f, scorePaint)
+    }
 }
