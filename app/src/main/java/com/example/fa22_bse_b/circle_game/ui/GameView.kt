@@ -10,7 +10,7 @@ import android.view.View
 import kotlin.random.Random
 
 @SuppressLint("ViewConstructor")
-class GameView(context: Context, private val radius: Float = 0f) : View(context) {
+class GameView(context: Context, private val radius: Float = 0f, val scoreCallBack: (Int) -> Unit) : View(context) {
     private val circlePaint = Paint()
     private val scorePaint = Paint().apply {
         textSize = 100f
@@ -29,6 +29,7 @@ class GameView(context: Context, private val radius: Float = 0f) : View(context)
                 ?: 0f) > cY - radius && (event?.y ?: 0f) < cY + radius
         ) {
             score++
+            scoreCallBack.invoke(score)
             println("Circle Start point = ${cX - radius}")
             println("Circle End point = ${cX + radius}")
             println("Circle Y Start point = ${cY - radius}")
