@@ -17,7 +17,8 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".circle_game.ui.GameActivity"
+        <activity
+            android:name=".circle_game.ui.GameActivity"
             android:exported="true">
 
         </activity>
@@ -43,7 +44,11 @@
 
         </activity>
 
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".login_migrated.ui.LoginMigratedActivity" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

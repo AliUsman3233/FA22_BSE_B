@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.fa22_bse_b.circle_game.ui.GameActivity
 import com.example.fa22_bse_b.databinding.ActivityMainBinding
 import com.example.fa22_bse_b.login.ui.LoginActivityThirdRevised
+import com.example.fa22_bse_b.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_b.shared_helper.SharedPreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 if (sharedPreferenceHelper?.getData("IsLoggedIn") == "YES") {
                     startActivity(Intent(this@MainActivity, GameActivity::class.java))
                 } else {
-                    startActivity(Intent(this@MainActivity, LoginActivityThirdRevised::class.java))
+                    startActivity(Intent(this@MainActivity, LoginMigratedActivity::class.java))
                 }
                 finish()
             }

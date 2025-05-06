@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.fa22_bse_b.login.ui.LoginActivityThirdRevised
+import com.example.fa22_bse_b.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_b.shared_helper.SharedPreferenceHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ class GameActivity : AppCompatActivity() {
         val gameView = GameView(this, 50f, scoreCallBack = {
             if(it > 5) {
                 sharedPreferenceHelper?.saveData("No", "IsLoggedIn")
-                startActivity(Intent(this, LoginActivityThirdRevised::class.java))
+                startActivity(Intent(this, LoginMigratedActivity::class.java))
                 finish()
             }
         })
