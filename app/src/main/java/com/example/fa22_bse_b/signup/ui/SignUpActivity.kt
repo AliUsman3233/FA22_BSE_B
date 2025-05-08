@@ -10,7 +10,9 @@ import com.example.fa22_bse_b.R
 import com.example.fa22_bse_b.databinding.ActivitySignupBinding
 import com.example.fa22_bse_b.databinding.LoginPageRevisedBinding
 import com.example.fa22_bse_b.databinding.LoginPageThirdRevisedBinding
+import com.example.fa22_bse_b.local_database.room_database.LocalDataBase
 import com.example.fa22_bse_b.login.model.LoginModel
+import com.example.fa22_bse_b.login_migrated.model.LoginEntity
 import com.example.fa22_bse_b.shared_helper.SharedPreferenceHelper
 import com.example.fa22_bse_b.signup.model.SignUpModel
 import com.example.fa22_bse_b.state_managment.SystemState
@@ -32,7 +34,10 @@ class SignUpActivity : AppCompatActivity() {
         binding?.signupBtn?.setOnClickListener {
             sharedPreferenceHelper?.saveData(signUpModel.email, "email")
             sharedPreferenceHelper?.saveData(signUpModel.password, "password")
-
+            lifecycleScope.launch(Dispatchers.IO) {
+                val db: LocalDataBase = LocalDataBase.getInstance(this@SignUpActivity.applicationContext)
+                db.getLoginDao().addLoginEntity(LoginEntity(email = signUpModel.email, password = signUpModel.password))
+            }
             lifecycleScope.launch {
                 delay(2000)
                 finish()

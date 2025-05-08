@@ -1,0 +1,10 @@
+package com.example.fa22_bse_b.login_migrated.model
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+
+@Entity(tableName = "login_table", primaryKeys = ["email"])
+data class LoginEntity(
+    @ColumnInfo("email") val email: String,
+    @ColumnInfo("password") val password: String
+)
