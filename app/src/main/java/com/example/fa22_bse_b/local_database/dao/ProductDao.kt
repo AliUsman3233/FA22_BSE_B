@@ -6,24 +6,26 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.fa22_bse_b.login_migrated.model.LoginEntity
 import com.example.fa22_bse_b.prodcuts.model.ProductEntity
+import com.example.fa22_bse_b.prodcuts_migrated.model.ProductEntityMigrated
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
 
     @Query("select * from product_table")
-    fun getAllLogins(): List<ProductEntity>
+    fun getAllProducts(): Flow<List<ProductEntityMigrated>>
     // select * from tablename
 
     @Query("select * from product_table where id=:id LIMIT 1")
-    fun getLoginByEId(id: String): ProductEntity
+    fun getProductByEId(id: String): ProductEntityMigrated
 
     @Insert
-    fun addLoginEntity(loginEntity: ProductEntity)
+    fun addProductEntity(productEntity: ProductEntityMigrated)
 
     @Query("delete from product_table where id=:id")
-    fun deleteLoginRecordByEmail(id: String)
+    fun deleteProductRecordById(id: String)
 
     @Update
-    fun updateLoginRecord(productEntity: ProductEntity)
+    fun updateProductRecord(productEntity: ProductEntityMigrated)
 
 }

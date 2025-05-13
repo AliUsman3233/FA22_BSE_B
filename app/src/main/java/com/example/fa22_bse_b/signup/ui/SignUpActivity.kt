@@ -35,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
             sharedPreferenceHelper?.saveData(signUpModel.email, "email")
             sharedPreferenceHelper?.saveData(signUpModel.password, "password")
             lifecycleScope.launch(Dispatchers.IO) {
-                val db: LocalDataBase = LocalDataBase.getInstance(this@SignUpActivity.applicationContext)
+                val db: LocalDataBase = LocalDataBase.getInstance()
                 db.getLoginDao().addLoginEntity(LoginEntity(email = signUpModel.email, password = signUpModel.password))
             }
             lifecycleScope.launch {

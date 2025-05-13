@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".FA22_BSE_Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -47,7 +48,7 @@
         <activity android:name=".login_migrated.ui.LoginMigratedActivity" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".prodcuts_migrated.ui.ProductsActivityMigrated"
             android:exported="true">
 
             <intent-filter>
@@ -56,6 +57,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".prodcuts_migrated.ui.AddOrUpdateProductMigrated"/>
     </application>
 
 </manifest>

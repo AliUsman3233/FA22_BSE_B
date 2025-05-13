@@ -54,7 +54,7 @@ class LoginMigratedActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch(Dispatchers.IO) {
-            val db: LocalDataBase = LocalDataBase.getInstance(this@LoginMigratedActivity.applicationContext)
+            val db: LocalDataBase = LocalDataBase.getInstance()
 
             val loginList: List<LoginEntity> = db.getLoginDao().getAllLogins()
             Log.e(tag, "onCreate:loginListloginList = $loginList ", )
