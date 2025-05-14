@@ -5,15 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.fa22_bse_b.FA22_BSE_Application
+import com.example.fa22_bse_b.cart.model.CartItemEntity
+import com.example.fa22_bse_b.local_database.dao.CartItemDao
 import com.example.fa22_bse_b.local_database.dao.LoginDao
 import com.example.fa22_bse_b.local_database.dao.ProductDao
 import com.example.fa22_bse_b.login_migrated.model.LoginEntity
 import com.example.fa22_bse_b.prodcuts_migrated.model.ProductEntityMigrated
 
-@Database(entities = [LoginEntity::class, ProductEntityMigrated::class], version = 1)
+@Database(entities = [LoginEntity::class, ProductEntityMigrated::class, CartItemEntity::class], version = 1)
 abstract class LocalDataBase : RoomDatabase() {
     abstract fun getLoginDao(): LoginDao
     abstract fun getProductDao(): ProductDao
+    abstract fun getCartItemDao(): CartItemDao
 
 
     companion object {
