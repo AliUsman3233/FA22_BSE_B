@@ -34,10 +34,13 @@ class ProductsAdopterMigrated(val viewModel: ProductsViewModel) :
         holder.productRowBinding.deleteBtn.setOnClickListener {
             viewModel.removeProduct(dataItem.id)
         }
+
 //
-//        holder.productRowBinding.UpdateBtn.setOnClickListener {
+        holder.productRowBinding.UpdateBtn.setOnClickListener {
+            viewModel.updateProduct(dataItem.id)
+
 //            updateProductCallBack.invoke(dataItem.id)
-//        }
+        }
 //        holder.productRowBinding.price.setText(dataItem.price.toString())
     }
 

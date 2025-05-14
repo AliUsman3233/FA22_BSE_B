@@ -11,6 +11,7 @@ import com.example.fa22_bse_b.databinding.ActivityAddOrRemoveProductBinding
 import com.example.fa22_bse_b.databinding.ActivityAddOrRemoveProductMigratedBinding
 import com.example.fa22_bse_b.prodcuts.model.Product
 import com.example.fa22_bse_b.prodcuts_migrated.view_model.AddOrUpdateProductViewModel
+import com.example.fa22_bse_b.prodcuts_migrated.view_model.ProductScreenState
 import com.example.fa22_bse_b.state_managment.SystemState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,7 +28,11 @@ class AddOrUpdateProductMigrated : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_or_remove_product_migrated)
         binding?.viewModel = addOrUpdateProductViewModel
+        var productId: String? = null
 
+        if(intent.extras != null) {
+            productId = intent?.extras?.getString("ProductId")
+        }
         addOrUpdateProductViewModel.productAddedMLD.observe(this) {
             if(it == true) {
                 Toast.makeText(this, "Product Added Successfully", Toast.LENGTH_SHORT).show()
@@ -39,6 +44,14 @@ class AddOrUpdateProductMigrated : AppCompatActivity() {
                 }
 
             }
+        }
+
+        if(productId != null) {
+            binding?.submitButton?.setText("Update")
+            addOrUpdateProductViewModel.screenStateMLD.value = ProductScreenState.Update
+            addOrUpdateProductViewModel.getProductForUpdate(productId)
+        } else {
+            addOrUpdateProductViewModel.screenStateMLD.value = ProductScreenState.Create
         }
 
 //        if(SystemState.product != null) {

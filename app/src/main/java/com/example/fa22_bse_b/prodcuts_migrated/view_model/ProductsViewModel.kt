@@ -19,7 +19,10 @@ class ProductsViewModel : ViewModel() {
     val productListLD: LiveData<List<ProductEntityMigrated>> =
         LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
 
+
     val navigateToAddProductMLD: MutableLiveData<Boolean> = MutableLiveData()
+
+    val navigateToUpdateProductMLD: MutableLiveData<String> = MutableLiveData()
 
     fun navigateToAddProductScreen() {
         navigateToAddProductMLD.value = true
@@ -31,6 +34,11 @@ class ProductsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             LocalDataBase.getInstance().getProductDao().deleteProductRecordById(id)
         }
-        // Login to remove
+    }
+
+    fun updateProduct(id: String) {
+        Toast.makeText(FA22_BSE_Application.context?.applicationContext, "Trying to update product with id =$id ", Toast.LENGTH_SHORT).show()
+        navigateToUpdateProductMLD.value = id
     }
 }
+

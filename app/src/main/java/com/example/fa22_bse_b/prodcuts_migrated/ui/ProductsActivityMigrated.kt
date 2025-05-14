@@ -48,6 +48,21 @@ class ProductsActivityMigrated : AppCompatActivity() {
             }
         }
 
+        productsViewModel.navigateToUpdateProductMLD.observe(this) { productId ->
+            if (productId != null) {
+                Toast.makeText(this, "Navigating to Update Product Screen", Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    delay(500)
+                    startActivity(
+                        Intent(
+                            this@ProductsActivityMigrated,
+                            AddOrUpdateProductMigrated::class.java
+                        ).putExtra("ProductId", productId)
+                    )
+                }
+            }
+        }
+
 
         productsViewModel.productListLD.observe(this) { allProducts ->
 
