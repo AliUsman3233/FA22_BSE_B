@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_b.R
+import com.example.fa22_bse_b.cart.viewmodel.CartViewModel
 import com.example.fa22_bse_b.databinding.ProductListScreenMigratedBinding
 import com.example.fa22_bse_b.prodcuts_migrated.adopter.ProductsAdopterMigrated
 import com.example.fa22_bse_b.prodcuts_migrated.view_model.ProductsViewModel
@@ -23,12 +24,15 @@ class ProductsActivityMigrated : AppCompatActivity() {
     var binding: ProductListScreenMigratedBinding? = null
     var productListAdopter: ProductsAdopterMigrated? = null
     val productsViewModel: ProductsViewModel by viewModels()
+    val cartViewModel: CartViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.product_list_screen_migrated)
         binding?.viewmodel = productsViewModel
+        binding?.cartViewModel = cartViewModel
+        binding?.lifecycleOwner = this
 
-        productListAdopter = ProductsAdopterMigrated(viewModel = productsViewModel)
+        productListAdopter = ProductsAdopterMigrated(viewModel = productsViewModel, cartViewModel = cartViewModel)
         binding?.productRv?.adapter = productListAdopter
         binding?.productRv?.layoutManager = LinearLayoutManager(this)
 
@@ -69,6 +73,10 @@ class ProductsActivityMigrated : AppCompatActivity() {
             Log.e("ProductsActivityMigrated", "onCreate: allProducts = ${allProducts}")
             productListAdopter?.submitList(allProducts)
             productListAdopter?.notifyDataSetChanged()
+        }
+
+        cartViewModel.cartItemsList.observe(this) { cartItemsList ->
+            Log.e("ProductsActivityMigrated", "cartItemsList: $cartItemsList", )
         }
 
 

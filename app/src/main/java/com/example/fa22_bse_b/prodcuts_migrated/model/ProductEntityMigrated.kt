@@ -13,5 +13,4 @@ data class ProductEntityMigrated(
     var company: String? = "",
     var price: String? = "",
     var discount: String? = "",
-    var quantity: String? = ""
 )

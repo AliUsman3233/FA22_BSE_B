@@ -14,6 +14,6 @@ data class CartItemEntity(
     var company: String? = "",
     var price: String? = "",
     var discount: String? = "",
-    var quantity: String? = "",
+    var quantity: Int,
     var cartItemState: Boolean
 )

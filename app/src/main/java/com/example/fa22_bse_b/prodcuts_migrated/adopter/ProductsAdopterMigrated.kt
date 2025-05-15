@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fa22_bse_b.cart.viewmodel.CartViewModel
 import com.example.fa22_bse_b.databinding.ProductRowDesignMigratedBinding
 import com.example.fa22_bse_b.prodcuts_migrated.model.ProductEntityMigrated
 import com.example.fa22_bse_b.prodcuts_migrated.view_model.ProductsViewModel
 
 // Ui Layer
-class ProductsAdopterMigrated(val viewModel: ProductsViewModel) :
+class ProductsAdopterMigrated(val viewModel: ProductsViewModel, val cartViewModel: CartViewModel) :
     ListAdapter<ProductEntityMigrated, ProductsAdopterMigrated.ProductViewHolder>(diffCheker) {
 
 
@@ -31,6 +32,7 @@ class ProductsAdopterMigrated(val viewModel: ProductsViewModel) :
         val dataItem = getItem(index)
         holder.productRowBinding.product = dataItem
         holder.productRowBinding.viewModel = viewModel
+        holder.productRowBinding.cartViewModel = cartViewModel
         holder.productRowBinding.deleteBtn.setOnClickListener {
             viewModel.removeProduct(dataItem.id)
         }
