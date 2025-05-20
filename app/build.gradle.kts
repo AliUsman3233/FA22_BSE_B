@@ -88,4 +88,5 @@ dependencies {
 
     kapt(libs.androidx.room.compiler.v250) // if you're using Kotlin (use kapt instead of annotationProcessor)
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

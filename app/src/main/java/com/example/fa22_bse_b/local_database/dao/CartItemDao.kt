@@ -1,6 +1,7 @@
 package com.example.fa22_bse_b.local_database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -22,4 +23,7 @@ interface CartItemDao {
 
     @Update
     fun updateCartItem(cartItemEntity: CartItemEntity)
+
+    @Delete
+    fun deleteCartItem(cartItem: CartItemEntity)
 }

@@ -1,10 +1,14 @@
 package com.example.fa22_bse_b.prodcuts_migrated.adopter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.fa22_bse_b.FA22_BSE_Application
 import com.example.fa22_bse_b.cart.viewmodel.CartViewModel
 import com.example.fa22_bse_b.databinding.ProductRowDesignMigratedBinding
 import com.example.fa22_bse_b.prodcuts_migrated.model.ProductEntityMigrated
@@ -37,10 +41,21 @@ class ProductsAdopterMigrated(val viewModel: ProductsViewModel, val cartViewMode
             viewModel.removeProduct(dataItem.id)
         }
 
+        kotlin.runCatching {
+            Glide.with(holder.productRowBinding.root.context)
+                .load(dataItem.imageUrl)
+                .into(holder.productRowBinding.productIv)
+
+        }.fold(onSuccess = {
+            Log.e(this@ProductsAdopterMigrated.javaClass.simpleName, "onBindViewHolder: Image Loaded", )
+        }, onFailure = {
+            Log.e(this@ProductsAdopterMigrated.javaClass.simpleName, "onBindViewHolder: Image Not Loaded", )
+        })
+
+
 //
         holder.productRowBinding.UpdateBtn.setOnClickListener {
             viewModel.updateProduct(dataItem.id)
-
 //            updateProductCallBack.invoke(dataItem.id)
         }
 //        holder.productRowBinding.price.setText(dataItem.price.toString())

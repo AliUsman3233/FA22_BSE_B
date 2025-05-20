@@ -38,7 +38,7 @@
                 android:id="@+id/product_iv"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/glassses_"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +165,7 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:visibility="@{cartViewModel.isProductIsAddedInCard(product.id)==0 ? View.VISIBLE: View.GONE, default=visible}"
+                android:visibility="@{cartViewModel.isProductIsAddedInCard(product.id) == 0 ? View.VISIBLE: View.GONE, default=visible}"
                 android:onClick="@{() -> cartViewModel.addProductToCart(product.id)}"
                 android:padding="3dp"
                 android:src="@drawable/baseline_add_shopping_cart_24"
@@ -184,7 +184,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="30dp"
-                    android:layout_height="30dp">
+                    android:layout_height="30dp"
+                    android:onClick="@{() -> cartViewModel.decrementInProductQuantity(product.id)}">
 
                     <ImageView
                         android:layout_width="match_parent"

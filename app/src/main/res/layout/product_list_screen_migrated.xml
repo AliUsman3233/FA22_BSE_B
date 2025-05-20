@@ -77,15 +77,27 @@
 
             />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addBtn"
-            android:layout_width="50dp"
+        <Button
+            android:id="@+id/checkout_to_cart"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:src="@drawable/baseline_add_24"
+            android:text="Checkout"
+            android:layout_marginHorizontal="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <Button
+            android:id="@+id/addBtn"
+            android:text="Add Product"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintStart_toEndOf="@+id/checkout_to_cart"
+            app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{() -> viewmodel.navigateToAddProductScreen()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

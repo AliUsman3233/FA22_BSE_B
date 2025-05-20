@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_b.R
+import com.example.fa22_bse_b.cart.ui.CheckoutActivity
 import com.example.fa22_bse_b.cart.viewmodel.CartViewModel
 import com.example.fa22_bse_b.databinding.ProductListScreenMigratedBinding
 import com.example.fa22_bse_b.prodcuts_migrated.adopter.ProductsAdopterMigrated
@@ -77,6 +78,12 @@ class ProductsActivityMigrated : AppCompatActivity() {
 
         cartViewModel.cartItemsList.observe(this) { cartItemsList ->
             Log.e("ProductsActivityMigrated", "cartItemsList: $cartItemsList", )
+            productListAdopter?.notifyDataSetChanged()
+
+        }
+
+        binding?.checkoutToCart?.setOnClickListener {
+            startActivity(Intent(this, CheckoutActivity::class.java))
         }
 
 
