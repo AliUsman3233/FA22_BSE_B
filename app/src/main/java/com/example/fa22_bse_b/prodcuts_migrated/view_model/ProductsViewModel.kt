@@ -32,6 +32,11 @@ class ProductsViewModel : ViewModel() {
 
         Toast.makeText(FA22_BSE_Application.context?.applicationContext, "Trying to remove product with id =$id ", Toast.LENGTH_SHORT).show()
         viewModelScope.launch(Dispatchers.IO) {
+            // First Check
+            val cartItem = LocalDataBase.getInstance().getCartItemDao().getCartItemById(id = id)
+            cartItem?.let {
+                LocalDataBase.getInstance().getCartItemDao().deleteCartItem(cartItem = cartItem)
+            }
             LocalDataBase.getInstance().getProductDao().deleteProductRecordById(id)
         }
     }

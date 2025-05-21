@@ -27,7 +27,7 @@ class CheckoutActivity : AppCompatActivity() {
         binding?.checkoutViewModel = checkoutViewModel
         binding?.lifecycleOwner = this
 
-        cartItemAdopter = CartAdopterMigrated()
+        cartItemAdopter = CartAdopterMigrated(checkoutViewModel = checkoutViewModel)
         binding?.billRv?.adapter = cartItemAdopter
         binding?.billRv?.layoutManager = LinearLayoutManager(this)
 

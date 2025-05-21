@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_b.cart.model.CartItemEntity
+import com.example.fa22_bse_b.cart.viewmodel.CartViewModel
+import com.example.fa22_bse_b.cart.viewmodel.CheckoutViewModel
 import com.example.fa22_bse_b.databinding.BillItemRowBinding
 
 // Ui Layer
-class CartAdopterMigrated() :
+class CartAdopterMigrated(val checkoutViewModel: CheckoutViewModel) :
     ListAdapter<CartItemEntity, CartAdopterMigrated.CartItemViewHolder>(diffCheker) {
 
 
@@ -30,6 +32,7 @@ class CartAdopterMigrated() :
         val dataItem = getItem(index)
 
         holder.binding.cartItem = dataItem
+        holder.binding.checkoutVm = checkoutViewModel
 
         holder.binding.totalPrice.setText(
             (dataItem.quantity.toDouble() * (dataItem.price?.toDouble() ?: 0.0)).toString()

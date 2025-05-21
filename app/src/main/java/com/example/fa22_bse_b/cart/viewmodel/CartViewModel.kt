@@ -61,7 +61,7 @@ class CartViewModel : ViewModel() {
         Toast.makeText(FA22_BSE_Application.context, "Tyring to increment in quantity", Toast.LENGTH_SHORT).show()
         viewModelScope.launch(Dispatchers.IO) {
             val cartItem = LocalDataBase.getInstance().getCartItemDao().getCartItemById(id = cartItemId)
-            cartItem.quantity = cartItem.quantity + 1
+            cartItem!!.quantity = cartItem.quantity + 1
             LocalDataBase.getInstance().getCartItemDao().updateCartItem(cartItem)
         }
     }
@@ -70,7 +70,7 @@ class CartViewModel : ViewModel() {
         Toast.makeText(FA22_BSE_Application.context, "Tyring to decrement in quantity", Toast.LENGTH_SHORT).show()
         viewModelScope.launch(Dispatchers.IO) {
             val cartItem = LocalDataBase.getInstance().getCartItemDao().getCartItemById(id = cartItemId)
-            if(cartItem.quantity > 1) {
+            if(cartItem!!.quantity > 1) {
                 cartItem.quantity = cartItem.quantity - 1
                 LocalDataBase.getInstance().getCartItemDao().updateCartItem(cartItem)
             } else {

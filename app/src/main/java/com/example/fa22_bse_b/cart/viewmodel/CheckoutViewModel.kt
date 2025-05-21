@@ -31,4 +31,24 @@ class CheckoutViewModel : ViewModel() {
     }
 
     val cartItems = LocalDataBase.getInstance().getCartItemDao().getAllCartItems().asLiveData()
+
+    val totalBill = cartItems.switchMap { items ->
+        liveData {
+            var totalAmount = 0.0
+            items.forEach {
+                ((it.price?.toDouble()?:0.0) * it.quantity).let { singleItemTotalPrice ->
+                    totalAmount += singleItemTotalPrice - ((singleItemTotalPrice/100) * (it.discount?.toDouble()?:0.0))
+                }
+            }
+            emit(totalAmount)
+        }
+
+    }
+
+    fun deleteCartItem(cartItemId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val cartItem = LocalDataBase.getInstance().getCartItemDao().getCartItemById(id = cartItemId)
+            LocalDataBase.getInstance().getCartItemDao().deleteCartItem(cartItem = cartItem!!)
+        }
+    }
 }

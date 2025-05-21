@@ -19,7 +19,7 @@ interface CartItemDao {
 
 
     @Query("select * from cart_table where id=:id LIMIT 1")
-    fun getCartItemById(id: String): CartItemEntity
+    fun getCartItemById(id: String): CartItemEntity?
 
     @Update
     fun updateCartItem(cartItemEntity: CartItemEntity)
