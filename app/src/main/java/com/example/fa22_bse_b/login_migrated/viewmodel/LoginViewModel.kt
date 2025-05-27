@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.example.fa22_bse_b.local_database.room_database.LocalDataBase
 import com.example.fa22_bse_b.login_migrated.model.LoginMigratedModel
 import com.example.fa22_bse_b.shared_helper.SharedPreferenceHelper
 import kotlinx.coroutines.Dispatchers
@@ -22,26 +23,26 @@ class LoginViewModel : ViewModel() {
     val loginStateMLD: MutableLiveData<Boolean> = MutableLiveData()
     val signUpStateMLD: MutableLiveData<Boolean> = MutableLiveData()
 
-    //Counter
-    val counterStateMLD: MutableLiveData<Int> = MutableLiveData(0)
-
-
-    val counter2StateLD: LiveData<String> = counterStateMLD.map { counterValue ->
-        (counterValue * 2).toString()
-    }
-
-    val counter3StateLD: LiveData<String> = counter2StateLD.map {
-        (it.toInt()/2).toString()
-    }
+//    //Counter
+//    val counterStateMLD: MutableLiveData<Int> = MutableLiveData(0)
+//
+//
+//    val counter2StateLD: LiveData<String> = counterStateMLD.map { counterValue ->
+//        (counterValue * 2).toString()
+//    }
+//
+//    val counter3StateLD: LiveData<String> = counter2StateLD.map {
+//        (it.toInt() / 2).toString()
+//    }
 
     init { // Constructor
 
-        viewModelScope.launch(Dispatchers.IO) {
-            while (true) {
-                delay(200)
-                counterStateMLD.postValue((counterStateMLD.value ?: 0) + 1)
-            }
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            while (true) {
+//                delay(200)
+//                counterStateMLD.postValue((counterStateMLD.value ?: 0) + 1)
+//            }
+//        }
     }
 
     fun initSharedPrefHelper(context: Context) {
@@ -50,16 +51,20 @@ class LoginViewModel : ViewModel() {
 
 
     fun onLoginButtonCLick() {
-        if (loginModel.email == sharedPreferenceHelper?.getData("email") && loginModel.password == sharedPreferenceHelper?.getData(
-                "password"
-            )
-        ) {
-            sharedPreferenceHelper?.saveData("YES", "IsLoggedIn")
-            loginStateMLD.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            LocalDataBase.getInstance().getLoginDao().getAllLoginsAsFlow().collect { allLogins ->
+                val user = allLogins.find { it.email == loginModel.email }
+                if (loginModel.email == user?.email && loginModel.password == user.password) {
+                    sharedPreferenceHelper?.saveData("YES", "IsLoggedIn")
+                    loginStateMLD.postValue(true)
 
-        } else {
-            loginStateMLD.value = false
+                } else {
+                    loginStateMLD.postValue(false)
+                }
+            }
+
         }
+
     }
 
     fun onSignUpButtonClick() {

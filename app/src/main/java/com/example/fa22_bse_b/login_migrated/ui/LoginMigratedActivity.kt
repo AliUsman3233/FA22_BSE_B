@@ -15,6 +15,7 @@ import com.example.fa22_bse_b.local_database.room_database.LocalDataBase
 import com.example.fa22_bse_b.login_migrated.model.LoginEntity
 import com.example.fa22_bse_b.login_migrated.viewmodel.LoginViewModel
 import com.example.fa22_bse_b.signup.ui.SignUpActivity
+import com.example.fa22_bse_b.users.ui.UsersActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -37,7 +38,7 @@ class LoginMigratedActivity : AppCompatActivity() {
 
         loginViewModel.loginStateMLD.observe(this) { loginState ->
             if (loginState) {
-                startActivity(Intent(this@LoginMigratedActivity, GameActivity::class.java))
+                startActivity(Intent(this@LoginMigratedActivity, UsersActivity::class.java).putExtra("email", loginViewModel.loginModel.email))
                 finish()
             } else {
                 Toast.makeText(this, "Login unsuccessful", Toast.LENGTH_SHORT).show()

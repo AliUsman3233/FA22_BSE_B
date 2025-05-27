@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_b.databinding.ProductRowDesignBinding
 import com.example.fa22_bse_b.prodcuts.model.Product
 
-// Ui Layer
-class ProductsAdopter(var deleteProductCallBack: (String) -> Unit, var updateProductCallBack: (String) -> Unit) : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(diffCheker) {
+class ProductsAdopter(
+    var deleteProductCallBack: (String) -> Unit,
+    var updateProductCallBack: (String) -> Unit
+) : ListAdapter<Product, ProductsAdopter.ProductViewHolder>(diffCheker) {
 
 
     inner class ProductViewHolder(var productRowBinding: ProductRowDesignBinding) :
