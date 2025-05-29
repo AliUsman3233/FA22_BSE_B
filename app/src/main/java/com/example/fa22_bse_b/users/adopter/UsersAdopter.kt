@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fa22_bse_b.databinding.ProductRowDesignBinding
 import com.example.fa22_bse_b.databinding.UserRowDesignBinding
-import com.example.fa22_bse_b.prodcuts.model.Product
 
 // Ui Layer
-class UsersAdopter(
-) : ListAdapter<String, UsersAdopter.UserViewHolder>(diffCheker2) {
+class UsersAdopter(val onUserClickCallBack: (String) -> Unit) :
+    ListAdapter<String, UsersAdopter.UserViewHolder>(diffCheker2) {
 
 
     inner class UserViewHolder(var binding: UserRowDesignBinding) :
@@ -29,7 +27,11 @@ class UsersAdopter(
     override fun onBindViewHolder(holder: UserViewHolder, index: Int) {
         val dataItem = getItem(index)
         holder.binding.userEmail.setText(dataItem)
-      }
+        holder.binding.root.setOnClickListener {
+            onUserClickCallBack.invoke(dataItem)
+        }
+
+    }
 
 
 }

@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_b.R
+import com.example.fa22_bse_b.chat.ui.ChatActivity
+import com.example.fa22_bse_b.chat.vm.ChatViewModel
 import com.example.fa22_bse_b.databinding.ActivityUsersBinding
 import com.example.fa22_bse_b.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_b.prodcuts.adopter.UsersAdopter
@@ -19,6 +21,7 @@ class UsersActivity : AppCompatActivity() {
     var userAdopetr: UsersAdopter? = null
     var sharedPreferenceHelper: SharedPreferenceHelper? = null
 
+    val chatViewModel: ChatViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var logedInemail = ""
@@ -26,14 +29,26 @@ class UsersActivity : AppCompatActivity() {
             logedInemail = intent.extras?.getString("email") ?: ""
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_users)
-        userAdopetr = UsersAdopter()
+        userAdopetr = UsersAdopter(onUserClickCallBack = { email ->
+            startActivity(Intent(this,ChatActivity::class.java).putExtra("to",email).putExtra("from",logedInemail))
+        })
         binding?.usersRv?.adapter = userAdopetr
         binding?.usersRv?.layoutManager = LinearLayoutManager(this)
         sharedPreferenceHelper = SharedPreferenceHelper(this)
         loginViewModel.userList.observe(this) { allLogins ->
             userAdopetr?.submitList(allLogins.map { it.email }.filter { it != logedInemail })
+            allLogins.forEach { user ->
+                chatViewModel.getAllChatsWithPersonAndSetStatusAsDelivered(_to = logedInemail, _from = user.email)
+            }
             userAdopetr?.notifyDataSetChanged()
         }
+        chatViewModel.from = logedInemail
+        chatViewModel.filterChatsCurrentlySent.observe(this) { allSentMessages ->
+            allSentMessages.forEach {
+                chatViewModel.setMessageAsDelivered(messageId = it.id)
+            }
+        }
+
 
 
 

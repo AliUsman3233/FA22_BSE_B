@@ -9,9 +9,9 @@ data class ChatModel(
     val message: String,
     val time: String,
     var messageStatus: MessageStatus ?= null,
-    val messageType: MessageType,
+    val messageType: MessageType? = null,
     val to: String,
-    val from:
+    val from: String
 )
 
 

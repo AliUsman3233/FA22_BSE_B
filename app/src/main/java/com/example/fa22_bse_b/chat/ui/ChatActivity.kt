@@ -22,18 +22,27 @@ class ChatActivity : AppCompatActivity() {
     var binding: ActivityChatBinding? = null
     var chatAdopter: ChatAdopter? = null
     val chatViewModel: ChatViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat)
         binding?.chatViewModel = chatViewModel
         binding?.lifecycleOwner = this
-        chatAdopter = ChatAdopter()
+
+        if(intent.extras != null) {
+            chatViewModel.to = intent?.extras?.getString("to")
+            chatViewModel.from = intent?.extras?.getString("from")
+        }
+
+        chatAdopter = ChatAdopter(chatViewModel = chatViewModel)
         binding?.chatRv?.adapter = chatAdopter
         binding?.chatRv?.layoutManager = LinearLayoutManager(this)
-        chatViewModel.chatDataLD.observe(this) { allChats ->
+        chatViewModel.filteredChat.observe(this) { allChats ->
             chatAdopter?.submitList(allChats)
             chatAdopter?.notifyDataSetChanged()
         }
+
+
 
 
 
