@@ -22,7 +22,7 @@ class ChatAdopter(val chatViewModel: ChatViewModel) :
 
     override fun getItemViewType(position: Int): Int {
         val data = getItem(position)
-        return if (data.from == chatViewModel.from) 1 else 2
+        return if (data.from == chatViewModel.chatRepo.from) 1 else 2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,13 +43,13 @@ class ChatAdopter(val chatViewModel: ChatViewModel) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = getItem(position)
-        if (data.from == chatViewModel.from) {
+        if (data.from == chatViewModel.chatRepo.from) {
             (holder as SenderViewHolder).binding.chatModel = data
         } else {
             (holder as ReceiverViewHolder).binding.chatModel = data
         }
-        if ((data.messageStatus == MessageStatus.SENT || data.messageStatus == MessageStatus.DELIVERED) && data.to == chatViewModel.from) {
-            chatViewModel.setMessageAsSeen(data.id)
+        if ((data.messageStatus == MessageStatus.SENT || data.messageStatus == MessageStatus.DELIVERED) && data.to == chatViewModel.chatRepo.from) {
+            chatViewModel.chatRepo.setMessageAsSeen(data.id)
         }
     }
 

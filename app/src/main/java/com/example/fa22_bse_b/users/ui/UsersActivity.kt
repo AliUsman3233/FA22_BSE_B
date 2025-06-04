@@ -38,14 +38,14 @@ class UsersActivity : AppCompatActivity() {
         loginViewModel.userList.observe(this) { allLogins ->
             userAdopetr?.submitList(allLogins.map { it.email }.filter { it != logedInemail })
             allLogins.forEach { user ->
-                chatViewModel.getAllChatsWithPersonAndSetStatusAsDelivered(_to = logedInemail, _from = user.email)
+                chatViewModel.chatRepo.getAllChatsWithPersonAndSetStatusAsDelivered(_to = logedInemail, _from = user.email)
             }
             userAdopetr?.notifyDataSetChanged()
         }
-        chatViewModel.from = logedInemail
-        chatViewModel.filterChatsCurrentlySent.observe(this) { allSentMessages ->
+        chatViewModel.chatRepo.from = logedInemail
+        chatViewModel.chatRepo.filterChatsCurrentlySent.observe(this) { allSentMessages ->
             allSentMessages.forEach {
-                chatViewModel.setMessageAsDelivered(messageId = it.id)
+                chatViewModel.chatRepo.setMessageAsDelivered(messageId = it.id)
             }
         }
 

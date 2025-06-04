@@ -30,67 +30,17 @@ class ChatActivity : AppCompatActivity() {
         binding?.lifecycleOwner = this
 
         if(intent.extras != null) {
-            chatViewModel.to = intent?.extras?.getString("to")
-            chatViewModel.from = intent?.extras?.getString("from")
+            chatViewModel.chatRepo.to = intent?.extras?.getString("to")
+            chatViewModel.chatRepo.from = intent?.extras?.getString("from")
         }
 
         chatAdopter = ChatAdopter(chatViewModel = chatViewModel)
         binding?.chatRv?.adapter = chatAdopter
         binding?.chatRv?.layoutManager = LinearLayoutManager(this)
-        chatViewModel.filteredChat.observe(this) { allChats ->
+        chatViewModel.chatRepo.filteredChat.observe(this) { allChats ->
             chatAdopter?.submitList(allChats)
             chatAdopter?.notifyDataSetChanged()
         }
-
-
-
-
-
-    //        val messageData = getChatData()
-//        chatAdopter?.submitList(messageData)
-//        chatAdopter?.notifyDataSetChanged()
-
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            delay(10000)
-//            messageData[messageData.size - 1] = messageData.getOrNull(messageData.size - 1)?.apply {
-//                messageStatus = MessageStatus.SEEN
-//            }
-//            withContext(Dispatchers.Main) {
-//                chatAdopter?.submitList(messageData)
-//                chatAdopter?.notifyItemChanged(messageData.size - 1)
-//            }
-//        }
     }
 
-
-//    fun getChatData() = mutableListOf<ChatModel?>(
-//        ChatModel(
-//            message = "Hi, How Are you?",
-//            time = "9:55 AM",
-//            messageStatus = MessageStatus.SEEN,
-//            messageType = MessageType.SENDER
-//        ),
-//        ChatModel(
-//            message = "I am fine, What about you?",
-//            time = "9:56 AM",
-//            messageType = MessageType.RECEIVER
-//        ),
-//        ChatModel(
-//            message = "I am Good, What are you doing?",
-//            time = "9:57 AM",
-//            messageStatus = MessageStatus.SEEN,
-//            messageType = MessageType.SENDER
-//        ),
-//        ChatModel(
-//            message = "I am studying Mobile Application Development",
-//            time = "9:58 AM",
-//            messageType = MessageType.RECEIVER
-//        ),
-//        ChatModel(
-//            message = "Best of luck",
-//            time = "11:00 AM",
-//            messageStatus = MessageStatus.SENT,
-//            messageType = MessageType.SENDER
-//        )
-//    )
 }

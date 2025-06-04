@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="@={chatViewModel.messageMLD}" />
+                android:text="@={chatViewModel.chatRepo.messageMLD}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -52,7 +52,7 @@
             android:layout_marginBottom="10dp"
             android:src="@drawable/message"
             android:padding="10dp"
-            android:onClick="@{() -> chatViewModel.sendMessage()}"
+            android:onClick="@{() -> chatViewModel.chatRepo.sendMessage()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
